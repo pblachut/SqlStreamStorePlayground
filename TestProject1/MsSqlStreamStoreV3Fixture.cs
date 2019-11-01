@@ -25,7 +25,11 @@ namespace TestProject1
         private readonly DbFixture _dbFixture;
         public MsSqlStreamStoreV3 MsqlStreamStore { get; }
 
-        public Task ClearStore() => _dbFixture.ClearDatabase();
+        public async Task ClearStore()
+        {
+            await _dbFixture.ClearTable("Messages");
+            await _dbFixture.ClearTable("Streams");
+        }
 
         public void Dispose()
         {

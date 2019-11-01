@@ -10,8 +10,8 @@ namespace SqlStoreTest
 
         public static void Add<TEvent>(string name)
         {
-            NameToTypeMapping.Add(name, typeof(TEvent));
-            TypeToNameMapping.Add(typeof(TEvent), name);
+            NameToTypeMapping.TryAdd(name, typeof(TEvent));
+            TypeToNameMapping.TryAdd(typeof(TEvent), name);
         }
 
         public static string GetName(Type type) => TypeToNameMapping[type];

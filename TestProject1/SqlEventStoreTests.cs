@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using SqlStoreTest;
-using SqlStreamStore;
 using Xunit;
 
 namespace TestProject1
@@ -39,6 +37,38 @@ namespace TestProject1
 
             // RUN
             await fixture.Sut.CreateStream("testStream", new List<object> {personWasBorn, personDied});
+            
+            // ASSERT
+            var events = new List<object>();
+            await foreach(var @event in fixture.Sut.GetEventsFromStream("testStream"))
+            {
+                events.Add(@event);
+            }
+            
+            events.Should().BeEquivalentTo(personWasBorn, personDied);
+        }
+        
+        [Fact]
+        public async Task can_append_stream()
+        {
+            // PREPARE
+            var personWasBorn = new PersonWasBorn
+            {
+                PersonId = Guid.NewGuid(),
+                Date = new DateTime(2019, 10, 2)
+            };
+
+            var personDied = new PersonDied
+            {
+                PersonId = Guid.NewGuid(),
+                Date = new DateTime(2020, 10, 2)
+            };
+            
+            var fixture = await new Fixture(_fixture).Configure();
+            await fixture.Sut.CreateStream("testStream", new List<object> {personWasBorn});
+
+            // RUN
+            await fixture.Sut.AppendStream("testStream", new List<object> {personDied}, 0);
             
             // ASSERT
             var events = new List<object>();

@@ -46,19 +46,27 @@ namespace TestProject1
             connectionStringBuilder.InitialCatalog = database;
             return connectionStringBuilder.ToString();
         }
+        
+        public async Task ClearTable(string tableName)
+        {
+            using var connection = new SqlConnection(ConnectionString);
+            await connection.OpenAsync();
+            using var command = new SqlCommand($"DELETE FROM [{tableName}]", connection);
+            await command.ExecuteNonQueryAsync();
+        }
 
         public async Task ClearDatabase()
         {
-            using var connection = new SqlConnection(_masterConnectionString);
+            using var connection = new SqlConnection(ConnectionString);
             await connection.OpenAsync();
-            using var command = new SqlCommand("EXEC sp_MSForEachTable @command1='DELETE FROM ?'", connection);
+            using var command = new SqlCommand("EXEC sp_MSForEachTable @command1='SET QUOTED_IDENTIFIER ON; DELETE FROM ?'", connection);
             await command.ExecuteNonQueryAsync();
         }
         
 
         public void Dispose()
         {
-            //DeleteDatabase(_databaseName, _masterConnectionString).Wait();
+            DeleteDatabase(_databaseName, _masterConnectionString).Wait();
         }
     }
 }
