@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EventSourcing.Tests.TestDomain;
 using Xunit;
 
@@ -26,7 +27,7 @@ namespace EventSourcing.Tests
         }
 
         [Fact]
-        public void Can_Initialize_Aggregate_From_Events()
+        public async Task Can_Initialize_Aggregate_From_Events()
         {
             // PREPARE
             var @event = new TestAggregateCreated
@@ -34,10 +35,10 @@ namespace EventSourcing.Tests
                 TestAggregateId = 332,
                 Name = "ddsd"
             };
-            
+
             // RUN
             var aggregate = new TestAggregate();
-            aggregate.Initialize(new List<object>{@event}, 3333);
+            await aggregate.Initialize(GetEvents(@event), Task.FromResult(3333));
             
             // ASSERT
             Assert.False(aggregate.HasChanges());
@@ -46,9 +47,18 @@ namespace EventSourcing.Tests
             var changes = aggregate.GetChanges();
             Assert.Empty(changes);
         }
+
+        private async IAsyncEnumerable<object> GetEvents(params object[] events)
+        {
+            await Task.Delay(10);
+            foreach (var e in events)
+            {
+                yield return e;
+            }
+        }
         
         [Fact]
-        public void Can_Modify_Aggregate()
+        public async Task Can_Modify_Aggregate()
         {
             // PREPARE
             var @event = new TestAggregateCreated
@@ -58,7 +68,7 @@ namespace EventSourcing.Tests
             };
             
             var aggregate = new TestAggregate();
-            aggregate.Initialize(new List<object>{@event}, 3333);
+            await aggregate.Initialize(GetEvents(@event), Task.FromResult(3333));
             
             // RUN
             aggregate.ChangeName("changed name");

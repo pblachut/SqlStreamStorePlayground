@@ -45,21 +45,21 @@ namespace EventSourcing
             AggregateVersion = await aggregateVersion;
         }
         
-        public void Initialize(IEnumerable<object> events, int aggregateVersion)
-        {
-            if (events == null) 
-                throw new ArgumentNullException(nameof(events));
-            
-            if (HasChanges())
-                throw new InvalidOperationException("Initialize cannot be called on an instance with changes.");
-            
-            foreach (var @event in events)
-            {
-                Play(@event);
-            }
-            
-            AggregateVersion = aggregateVersion;
-        }
+//        public void Initialize(IEnumerable<object> events, int aggregateVersion)
+//        {
+//            if (events == null) 
+//                throw new ArgumentNullException(nameof(events));
+//            
+//            if (HasChanges())
+//                throw new InvalidOperationException("Initialize cannot be called on an instance with changes.");
+//            
+//            foreach (var @event in events)
+//            {
+//                Play(@event);
+//            }
+//            
+//            AggregateVersion = aggregateVersion;
+//        }
 
         protected void ApplyChange(object @event)
         {

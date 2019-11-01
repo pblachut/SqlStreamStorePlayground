@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSourcing", "EventSourc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSourcing.Tests", "EventSourcing.Tests\EventSourcing.Tests.csproj", "{9FAC7EC3-9FA2-470F-AEA8-5D0D905B1AEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{1DCE36DB-48DD-4CC6-B9E7-7427362EF80F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{9FAC7EC3-9FA2-470F-AEA8-5D0D905B1AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FAC7EC3-9FA2-470F-AEA8-5D0D905B1AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FAC7EC3-9FA2-470F-AEA8-5D0D905B1AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DCE36DB-48DD-4CC6-B9E7-7427362EF80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DCE36DB-48DD-4CC6-B9E7-7427362EF80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DCE36DB-48DD-4CC6-B9E7-7427362EF80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DCE36DB-48DD-4CC6-B9E7-7427362EF80F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

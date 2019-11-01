@@ -34,19 +34,14 @@ namespace SqlStoreTest
             {
                 page = await _streamStore.ReadStreamForwards(stream, readFrom, 1000);
 
-                yield return GetEvents(page.Messages);
-
-                readFrom = page.NextStreamVersion;
-            } while (page.IsEnd);
-
-            async IAsyncEnumerable<object> GetEvents(StreamMessage[] messages)
-            {
-                foreach (var message in messages)
+                foreach (var message in page.Messages)
                 {
                     var json = await message.GetJsonData();
                     yield return Deserialize(TypeCache.GetType(message.Type), json);
                 }
-            }
+
+                readFrom = page.NextStreamVersion;
+            } while (!page.IsEnd);
         }
 
         public async Task<int> GetLastEventNumber(string streamId)

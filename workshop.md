@@ -1,0 +1,7 @@
+- when we should create / use aggregate and when it is not needed
+- example with simple aggregate + command + event
+- example of simple projection
+- example of reactors
+-- with rabbit mq
+-- with sql stream store projection
+-- example of reactors with two phase commit
