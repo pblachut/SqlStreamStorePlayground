@@ -4,7 +4,7 @@ namespace EventSourcing
 {
     public interface IAsyncRepository<TAggregateRoot>
     {
-        Task<TAggregateRoot> GetAggregate(long aggregateId);
+        Task<TAggregateRoot> GetAggregate(string aggregateId);
         Task SaveAggregate(TAggregateRoot aggregate);
     }
     
@@ -18,7 +18,7 @@ namespace EventSourcing
             _eventStore = eventStore;
         }
         
-        public async Task<TAggregateRoot> GetAggregate(long aggregateId)
+        public async Task<TAggregateRoot> GetAggregate(string aggregateId)
         {
             var streamId = GetStreamId(aggregateId);
             
@@ -42,6 +42,6 @@ namespace EventSourcing
                 await _eventStore.AppendStream(streamId, changes, aggregate.AggregateVersion);
         }
 
-        private string GetStreamId(long aggregateId) => $"{typeof(TAggregateRoot).FullName}-{aggregateId}";
+        private string GetStreamId(string aggregateId) => $"{typeof(TAggregateRoot).FullName}-{aggregateId}";
     }
 }

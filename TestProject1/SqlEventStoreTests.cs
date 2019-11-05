@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using SqlStoreTest;
+using SqlStoreTest.Domain.Events;
 using Xunit;
 
 namespace TestProject1

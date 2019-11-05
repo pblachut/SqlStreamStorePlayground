@@ -13,7 +13,7 @@ namespace EventSourcing
         private readonly Dictionary<Type, Action<object>> _eventHandlers;
         
         public int AggregateVersion { get; private set; }
-        public long AggregateId { get; protected set; }
+        public string AggregateId { get; protected set; }
 
         protected Aggregate()
         {

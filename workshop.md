@@ -1,6 +1,10 @@
+- tell something about eventstroming
+-- mention about cynefin
+- tell something about cqrs
 - when we should create / use aggregate and when it is not needed
 - example with simple aggregate + command + event
 - example of simple projection
+- example with transaction across aggregates(saga)
 - example of reactors
 -- with rabbit mq
 -- with sql stream store projection

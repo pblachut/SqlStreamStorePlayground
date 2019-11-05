@@ -18,7 +18,7 @@ namespace EventSourcing.Tests
             // ASSERT
             Assert.True(testAggregate.AggregateIsNotPersisted());
             Assert.Equal(-1, testAggregate.AggregateVersion);
-            Assert.Equal(3232, testAggregate.AggregateId);
+            Assert.Equal("3232", testAggregate.AggregateId);
             var changes = testAggregate.GetChanges();
             Assert.Single(changes);
             var testAggregateCreated = (TestAggregateCreated) changes.Single();
@@ -42,7 +42,7 @@ namespace EventSourcing.Tests
             
             // ASSERT
             Assert.False(aggregate.HasChanges());
-            Assert.Equal(332, aggregate.AggregateId);
+            Assert.Equal("332", aggregate.AggregateId);
             Assert.Equal(3333, aggregate.AggregateVersion);
             var changes = aggregate.GetChanges();
             Assert.Empty(changes);
@@ -75,7 +75,7 @@ namespace EventSourcing.Tests
             
             // ASSERT
             Assert.True(aggregate.HasChanges());
-            Assert.Equal(332, aggregate.AggregateId);
+            Assert.Equal("332", aggregate.AggregateId);
             Assert.Equal(3333, aggregate.AggregateVersion);
             var changes = aggregate.GetChanges();
             Assert.Single(changes);

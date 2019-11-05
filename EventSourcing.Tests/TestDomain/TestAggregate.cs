@@ -2,6 +2,7 @@
 {
     public class TestAggregate : Aggregate
     {
+        private long _id;
         private string _name;
         private bool _isRemoved;
 
@@ -9,7 +10,8 @@
         {
             On<TestAggregateCreated>(e =>
             {
-                AggregateId = e.TestAggregateId;
+                AggregateId = e.TestAggregateId.ToString();
+                _id = e.TestAggregateId;
                 _name = e.Name;
             });
             On<TestAggregateNameChanged>(e => _name = e.CurrentName);
@@ -28,7 +30,7 @@
         
         public void ChangeName(string name) => ApplyChange(new TestAggregateNameChanged
         {
-            TestAggregateId = AggregateId,
+            TestAggregateId = _id,
             PreviousName = _name,
             CurrentName = name
         });
@@ -38,7 +40,7 @@
             if (_isRemoved)
                 return;
             
-            ApplyChange(new TestAggregateRemoved {TestAggregateId = AggregateId});
+            ApplyChange(new TestAggregateRemoved {TestAggregateId = _id});
         }
     }
 }
