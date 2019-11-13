@@ -6,7 +6,7 @@ namespace SqlStoreTest.Domain.Events
     {
         public Guid PersonId { get; set; }
         public DateTimeOffset Date { get; set; }
-        public double? BornLongitude { get; set; }
-        public double? BornLatitude { get; set; }
+        public double? DeathLongitude { get; set; }
+        public double? DeathLatitude { get; set; }
     }
 }
